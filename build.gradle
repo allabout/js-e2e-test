@@ -1,0 +1,33 @@
+apply plugin: "java"
+apply plugin: "eclipse"
+apply plugin: "application"
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+repositories {
+    mavenCentral()
+}
+
+mainClassName = "jstest.Main"
+
+run {
+    //argsプロパティを受け取った場合。
+    if (project.hasProperty('args')) {
+        //スペースで分割してrunタスクのargsオプションに渡す。
+        args project.args.split('\\s+')
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'lib', include: '*.jar')
+    compile fileTree(dir: 'lib/selenium-2.53.1', include: '*.jar')
+    compile fileTree(dir: 'lib/selenium-2.53.1/libs', include: '*.jar')
+}
+
+distZip {
+    into(project.name) {
+        from '.'
+        include 'conf/*'
+    }
+}
