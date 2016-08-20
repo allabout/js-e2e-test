@@ -1,0 +1,7 @@
+.*
+!/.gitignore
+/build/
+/bin/
+/distribution/
+/conf/*.conf
+!/conf/.gitkeep
