@@ -16,7 +16,7 @@ Selenium WebDriverを用いてJavaScript(以下JS)の自動テストを行いま
 
 - ソースコード  
     - 本ソースコードをクローンします。
-    - configディレクトリにapplication.configを作成します。
+    - confディレクトリにapplication.confを作成します。
     - [記述方法はこちら](/CONF.md)  
 
 - Java  
@@ -68,11 +68,12 @@ Selenium WebDriverを用いてJavaScript(以下JS)の自動テストを行いま
 
     $ gradle distZip
 
-- build/distributions/ にzipが作成されます。
+- build/distributions/ に生成されたzipを本番サーバーへデプロイします。
 
-- 解凍して下記コマンドでアプリを実行可能です。
+- 解凍後、js-e2e-test に入って、下記コマンドでアプリを実行できます。
     
-    $sh bin/js-e2e-test [テスト対象アプリ名(任意)] [テスト対象URL(*1)] [OS(mac or windows)]
+    $ cd js-e2e-test  
+    $ sh bin/js-e2e-test [テスト対象アプリ名(任意)] [テスト対象URL(*1)] [OS(mac or windows)]
 
     (*1) テスト対象のURLを改行区切りでファイルに記載。そのファイルへのパスを指定。
 
