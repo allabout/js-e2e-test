@@ -17,7 +17,7 @@ Selenium WebDriverを用いてJavaScript(以下JS)の自動テストを行いま
 - ソースコード  
     - 本ソースコードをクローンします。
     - confディレクトリにapplication.confを作成します。
-    - [記述方法はこちら](/CONF.md)  
+    - (同ディレクトリ内のapplication.conf.sampleをリネームして使用して下さい)  
 
 - Java  
     - JDK8をインストールします。  

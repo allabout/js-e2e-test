@@ -29,3 +29,7 @@ mail : {
     , body-prefix : "担当各位"  
     , body-prefix2 : "下記エラーが発生しています。"  
 }
+
+// Webdriverタイムアウト時間(秒)
+webdriver-implicitly-wait = 90
+webdriver-page-load-timeout = 90

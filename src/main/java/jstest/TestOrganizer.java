@@ -38,6 +38,8 @@ public class TestOrganizer implements Traceable{
     private boolean MAIL_SEND = false;
     private Set<String> EXCLUDE_DOMAINS = new HashSet<String>();
     private Map<String, String> mailConfig = new HashMap<String, String>();
+    private int WEBDRIVER_IMPLICITLY_WAIT;
+    private int WEBDRIVER_PAGE_LOAD_TIMEOUT;
 
     /**
      * コンストラクター
@@ -73,8 +75,10 @@ public class TestOrganizer implements Traceable{
 
             WebDriver webdriver = null;
             webdriver = new RemoteWebDriver(new URL(SELENIUM_SERVER_URL), capability);
-            webdriver.manage().timeouts().implicitlyWait(90, TimeUnit.SECONDS);
-            webdriver.manage().timeouts().pageLoadTimeout(90, TimeUnit.SECONDS);
+            webdriver.manage().timeouts().implicitlyWait(this.WEBDRIVER_IMPLICITLY_WAIT
+                                                        , TimeUnit.SECONDS);
+            webdriver.manage().timeouts().pageLoadTimeout(this.WEBDRIVER_PAGE_LOAD_TIMEOUT
+                                                        , TimeUnit.SECONDS);
 
             JsErrorManager jsErrorManager = new JsErrorManager(this.EXCLUDE_DOMAINS);
 
@@ -145,6 +149,8 @@ public class TestOrganizer implements Traceable{
         this.mailConfig.put("body-prefix", config.getString("mail.body-prefix"));
         this.mailConfig.put("body-prefix2", config.getString("mail.body-prefix2"));
 
+        this.WEBDRIVER_IMPLICITLY_WAIT = config.getInt("webdriver-implicitly-wait");
+        this.WEBDRIVER_PAGE_LOAD_TIMEOUT = config.getInt("webdriver-page-load-timeout");
     }
 
     /**
