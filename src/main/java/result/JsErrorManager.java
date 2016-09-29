@@ -1,6 +1,7 @@
 package result;
 
 import java.net.URI;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Set;
 
@@ -44,7 +45,8 @@ public class JsErrorManager implements Traceable{
 
         for(i = indexOfJsError; i < jsErrors.size(); i++) {
 
-                uri = URI.create(jsErrors.get(i).getSourceName());
+                String encodedSourceName = URLEncoder.encode( jsErrors.get(i).getSourceName() , "UTF-8");
+                uri = URI.create(encodedSourceName);
 
                 if ( !excludeDomains.contains(uri.getHost()) ){
                         errorDetails.append("<tr>");
