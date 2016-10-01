@@ -23,6 +23,7 @@ dependencies {
     compile fileTree(dir: 'lib', include: '*.jar')
     compile fileTree(dir: 'lib/selenium-2.53.1', include: '*.jar')
     compile fileTree(dir: 'lib/selenium-2.53.1/libs', include: '*.jar')
+    compile fileTree(dir: 'lib/commons-validator-1.5.1', include: '*.jar')
 }
 
 distZip {
