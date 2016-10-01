@@ -4,7 +4,7 @@ import java.net.URI;
 import java.net.URLEncoder;
 import java.util.List;
 import java.util.Set;
-
+import org.apache.commons.validator.routines.UrlValidator;
 import org.openqa.selenium.WebDriver;
 import net.jsourcerer.webdriver.jserrorcollector.JavaScriptError;
 import util.Traceable;
@@ -19,6 +19,7 @@ public class JsErrorManager implements Traceable{
     private final int indexOfJsError = 0;
     private StringBuffer errorDetails = new StringBuffer();
     private Set<String> excludeDomains;
+    private UrlValidator urlValidator = new UrlValidator( new String[] { "http", "https" } );
 
     /**
      * コンストラクター
@@ -45,8 +46,11 @@ public class JsErrorManager implements Traceable{
 
         for(i = indexOfJsError; i < jsErrors.size(); i++) {
 
-                String encodedSourceName = URLEncoder.encode( jsErrors.get(i).getSourceName() , "UTF-8");
-                uri = URI.create(encodedSourceName);
+            String sourceName = jsErrors.get(i).getSourceName();
+
+            //URIクラスでIllegalArgumentExceptionが発生するのを防ぐため、先にURLの妥当性を確認する。
+            if(this.urlValidator.isValid(sourceName)){
+                uri = URI.create(sourceName);
 
                 if ( !excludeDomains.contains(uri.getHost()) ){
                         errorDetails.append("<tr>");
@@ -54,6 +58,9 @@ public class JsErrorManager implements Traceable{
                         errorDetails.append("<td>" + jsErrors.get(i).toString() + "</td>");
                         errorDetails.append("</tr>");
                 }
+            }else{
+                out("不正なURLのため、JSエラーの抽出をスキップしました。" + sourceName);
+            }
         }
     }
 
